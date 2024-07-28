@@ -64,13 +64,13 @@ def main():
             # Get info data
             print(Fore.BLUE + f"Processing account {index}/{total_accounts}")
             info_data = make_get_request(url_info, headers)
-            if info_data:
-                points = info_data.get("sd", 0)
+            if info_data and info_data.get("code") == "00":
+                points = info_data["data"].get("sd", 0)
                 print(Fore.GREEN + f"Account {index} points: {points}")
 
             # Perform farming task
             farming_data = make_get_request(url_farming, headers)
-            if farming_data:
+            if farming_data and farming_data.get("code") == "00":
                 print(Fore.GREEN + f"Farming task completed for account {index}")
 
             # Jeda 5 detik antar akun
